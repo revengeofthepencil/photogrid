@@ -1,6 +1,6 @@
 # photogrid
 
-Draws a bright red grid over an image and saves it alongside the original as
+Draws a grid (bright red by default) over an image and saves it alongside the original as
 `<imagename>_grid.<extension>`.
 
 ## Requirements
@@ -12,14 +12,15 @@ setup needed.
 ## Usage
 
 ```bash
-uv run photogrid.py <image_path> <spacing_percent> <line_width_px>
+uv run photogrid.py <image_path> <spacing_percent> <line_width_px> [--color COLOR]
 ```
 
-| Argument          | Description                                                        |
-| ----------------- | ------------------------------------------------------------------ |
-| `image_path`      | Path to the input image (JPEG, PNG, etc.)                          |
-| `spacing_percent` | Distance between lines as a percentage of the image width/height   |
-| `line_width_px`   | Thickness of each line in pixels                                   |
+| Argument            | Description                                                                 |
+| ------------------- | --------------------------------------------------------------------------- |
+| `image_path`        | Path to the input image (JPEG, PNG, etc.)                                   |
+| `spacing_percent`   | Distance between lines as a percentage of the image width/height            |
+| `line_width_px`     | Thickness of each line in pixels                                            |
+| `-c`, `--color`     | Optional line color: a name (`white`, `yellow`) or hex (`#00ff00`, `#0f0`). Default `#ff0000` |
 
 ## Examples
 
@@ -34,6 +35,12 @@ uv run photogrid.py photo.png 33.333 4
 
 # 10x10 grid, 1px lines
 uv run photogrid.py photo.jpg 10 1
+
+# Quarter grid in white
+uv run photogrid.py photo.jpg 50 2 --color white
+
+# Quarter grid in green (quote hex colors so the shell doesn't treat # as a comment)
+uv run photogrid.py photo.jpg 50 2 -c "#00ff00"
 ```
 
 ## Notes
@@ -43,4 +50,4 @@ uv run photogrid.py photo.jpg 10 1
 - Lines are drawn only inside the image, not along its edges.
 - Lines are centered on their grid position.
 - The output keeps the input's format; JPEGs are saved at quality 95 with
-  chroma subsampling off, so thin red lines stay crisp.
+  chroma subsampling off, so thin colored lines stay crisp.
